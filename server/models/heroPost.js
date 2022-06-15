@@ -10,7 +10,7 @@ const heroSchema = mongoose.Schema({
   creator: String,
   tags: [String],
   selectedFile: String,
-  likeCount: {
+  addCount: {
     type: Number,
     default: 0
   },

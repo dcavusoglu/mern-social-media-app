@@ -22,3 +22,12 @@ export const createHero = (hero) => async (dispatch) => {
     console.log(error);
   }
 }
+
+export const updateHero = (id, hero) => async (dispatch) => {
+  try {
+    const { data } = await api.updateHero(id, hero);
+    dispatch({ type: 'UPDATE', payload: data })
+  } catch (error) {
+    console.log(error.message);
+  }
+}

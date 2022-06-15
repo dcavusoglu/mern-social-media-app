@@ -4,16 +4,21 @@ import FileBase from 'react-file-base64';
 
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
-import { createHero } from '../../actions/heros.js';
+import { createHero, updateHero } from '../../actions/heros.js';
 
-const Form = () => {
+const Form = ({currentId, setCurrentId}) => {
   const [heroData, setHeroData] = useState({ creator: '', title: '', detail: '', birthDate: '', deathDate: '', school: '', tags: '', selectedFile:'' })
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createHero(heroData));
+
+    if(currentId) {
+      dispatch(updateHero(currentId, heroData));
+    } else {
+      dispatch(createHero(heroData));
+    }
   }
 
   const clear = () => {
