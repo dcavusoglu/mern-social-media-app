@@ -15,7 +15,7 @@ export const createHero = (req, res) => {
 
   const hero = req.body;
 
-  const newHero = new HeroPost(post);
+  const newHero = new HeroPost(hero);
   try {
     newHero.save();
     res.status(201).json(newHero);

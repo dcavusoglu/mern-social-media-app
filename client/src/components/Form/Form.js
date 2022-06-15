@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 
+import { useDispatch } from 'react-redux';
 import useStyles from './styles';
+import { createHero } from '../../actions/heros.js';
 
 const Form = () => {
-  const [heroData, setHeroData] = useState({ creator: '', title: '', detail: '', birthdate: '', deathDate: '', school: '', tags: '', selectedFile:'' })
+  const [heroData, setHeroData] = useState({ creator: '', title: '', detail: '', birthDate: '', deathDate: '', school: '', tags: '', selectedFile:'' })
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const handleSubmit = () => {
-
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createHero(heroData));
   }
 
   const clear = () => {
@@ -38,14 +41,6 @@ const Form = () => {
           onChange={(e) => setHeroData({ ...heroData, title: e.target.value})}
         />
         <TextField
-          name='creator'
-          variant='outlined'
-          label='Creator'
-          fullWidth
-          value={heroData.creator}
-          onChange={(e) => setHeroData({ ...heroData, creator: e.target.value})}
-        />
-        <TextField
           name='detail'
           variant='outlined'
           label='Detail'
@@ -58,8 +53,8 @@ const Form = () => {
           variant='outlined'
           label='Birthdate'
           fullWidth
-          value={heroData.birthdate}
-          onChange={(e) => setHeroData({ ...heroData, birthdate: e.target.value})}
+          value={heroData.birthDate}
+          onChange={(e) => setHeroData({ ...heroData, birthDate: e.target.value})}
         />
         <TextField
           name='deathDate'
