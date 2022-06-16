@@ -28,11 +28,11 @@ const Hero = ( {hero, setCurrentId} ) => {
         </Button>
       </div>
       <div className={classes.details}>
-        <Typography variant='body2' color='textSecondary'>{hero.tags.map((tag) => `${tag} `)}</Typography>
+        <Typography variant='body2' color='textSecondary'>{hero.tags.map((tag) => `#${tag} `)}</Typography>
       </div>
       <CardContent>
         <Typography className={classes.title} variant='h5' gutterBottom>{hero.title}</Typography>
-        <Typography variant='h6' gutterBottom>{hero.detail}</Typography>
+        <Typography variant='h6' color='textSecondary' componenet='p'>{hero.detail}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button size='small' color='primary' onClick={()=>{dispatch(addHero(hero._id))}}>

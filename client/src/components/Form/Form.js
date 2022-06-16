@@ -23,7 +23,11 @@ const Form = ({currentId, setCurrentId}) => {
 
     if(currentId) {
       dispatch(updateHero(currentId, heroData));
-    } else {
+    }
+    //   else if (heroData.title && heroData.creator === null) {
+    //   alert('Your hero cannot be saved');
+    // }
+    else {
       dispatch(createHero(heroData));
     }
     clear();
@@ -92,7 +96,7 @@ const Form = ({currentId, setCurrentId}) => {
           label='Tags'
           fullWidth
           value={heroData.tags}
-          onChange={(e) => setHeroData({ ...heroData, tags: e.target.value})}
+          onChange={(e) => setHeroData({ ...heroData, tags: e.target.value.split(',')})}
         />
         <div>
           <FileBase className={classes.paper} type='file' multiple={false} onDone={({base64}) => setHeroData({ ...heroData, selectedFile: base64})} />
