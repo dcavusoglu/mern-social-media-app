@@ -41,3 +41,12 @@ export const deleteHero = (id) => async (dispatch) => {
     console.log(error);
   }
 }
+
+export const addHero = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.addHero(id);
+    dispatch({ type: 'ADD_HERO', payload: data })
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -47,3 +47,12 @@ export const deleteHero = async (req, res) => {
     console.log(error);
   }
 }
+
+export const addHero = async (req, res) => {
+  const { id } = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No hero with id');
+  const hero = await HeroPost.findById(id);
+  const updatedHero = await HeroPost.findByIdAndUpdate(id, { addCount: hero.addCount + 1 }, { new: true });
+
+  res.json(updatedHero);
+}

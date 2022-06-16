@@ -7,7 +7,7 @@ import moment from 'moment';
 import useStyles from './styles';
 import {useDispatch} from 'react-redux';
 
-import { deleteHero } from '../../../actions/heros';
+import { deleteHero, addHero } from '../../../actions/heros';
 
 const Hero = ( {hero, setCurrentId} ) => {
   const classes = useStyles();
@@ -35,10 +35,8 @@ const Hero = ( {hero, setCurrentId} ) => {
         <Typography variant='h6' gutterBottom>{hero.detail}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size='small' color='primary' onClick={()=>{}}>
-          <AddCircleOutlineIcon fontSize='small'/>
-          Add
-          {hero.addCount}
+        <Button size='small' color='primary' onClick={()=>{dispatch(addHero(hero._id))}}>
+          <AddCircleOutlineIcon fontSize='small'/>{hero.addCount >= 1 ? 'Added' :'Add'} {hero.addCount}
         </Button>
         <Button size='small' color='primary' onClick={()=>{dispatch(deleteHero(hero._id))}}>
           <DeleteIcon fontSize='small'/>
