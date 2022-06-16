@@ -26,16 +26,18 @@ const Form = ({currentId, setCurrentId}) => {
     } else {
       dispatch(createHero(heroData));
     }
+    clear();
   }
 
   const clear = () => {
-
+    setCurrentId(null);
+    setHeroData({ creator: '', title: '', detail: '', birthDate: '', deathDate: '', school: '', tags: '', selectedFile:'' });
   }
 
   return (
     <Paper className={classes.paper}>
       <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-        <Typography variant='h6'>${currentId ?  'Updating the hero' : 'Creating a Hero' } </Typography>
+        <Typography variant='h6'>{currentId ?  'Updating the hero' : 'Creating a Hero' } </Typography>
         <TextField
           name='creator'
           variant='outlined'

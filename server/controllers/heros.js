@@ -32,6 +32,18 @@ export const updateHero = async (req, res) => {
 
   if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No hero with id');
 
-  const updatedHero = await HeroPost.findByIdAndUpdate(_id, hero, {new: true});
+  const updatedHero = await HeroPost.findByIdAndUpdate(_id, {...hero, _id}, {new: true});
   res.json(updatedHero);
+}
+
+export const deleteHero = async (req, res) => {
+  const { id } = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No hero with id');
+
+  try {
+    await HeroPost.findByIdAndRemove(id);
+    res.json({ message: 'Hero deleted successfully!'});
+  } catch (error) {
+    console.log(error);
+  }
 }

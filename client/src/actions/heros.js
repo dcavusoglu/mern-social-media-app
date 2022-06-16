@@ -9,7 +9,7 @@ export const getHeros = () => async (dispatch) => {
     dispatch({ type: 'FETCH_ALL', payload : data });
 
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
@@ -19,7 +19,7 @@ export const createHero = (hero) => async (dispatch) => {
     const { data } = await api.createHero(hero);
     dispatch({ type: 'CREATE', payload: data })
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 }
 
@@ -28,6 +28,16 @@ export const updateHero = (id, hero) => async (dispatch) => {
     const { data } = await api.updateHero(id, hero);
     dispatch({ type: 'UPDATE', payload: data })
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
+  }
+}
+
+
+export const deleteHero = (id) => async (dispatch) => {
+  try {
+    await api.deleteHero(id);
+    dispatch({ type: 'DELETE', payload: id })
+  } catch (error) {
+    console.log(error);
   }
 }

@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getHeros());
-  }, [dispatch]);
+  }, [currentId, dispatch]);
 
   return (
     <Container maxidth='lg'>

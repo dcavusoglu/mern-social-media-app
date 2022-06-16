@@ -5,9 +5,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import useStyles from './styles';
+import {useDispatch} from 'react-redux';
+
+import { deleteHero } from '../../../actions/heros';
 
 const Hero = ( {hero, setCurrentId} ) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <Card className={classes.card}>
@@ -27,7 +31,8 @@ const Hero = ( {hero, setCurrentId} ) => {
         <Typography variant='body2' color='textSecondary'>{hero.tags.map((tag) => `${tag} `)}</Typography>
       </div>
       <CardContent>
-        <Typography className={classes.title} variant='h5' gutterBottom>{hero.detail}</Typography>
+        <Typography className={classes.title} variant='h5' gutterBottom>{hero.title}</Typography>
+        <Typography variant='h6' gutterBottom>{hero.detail}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button size='small' color='primary' onClick={()=>{}}>
@@ -35,7 +40,7 @@ const Hero = ( {hero, setCurrentId} ) => {
           Add
           {hero.addCount}
         </Button>
-        <Button size='small' color='primary' onClick={()=>{}}>
+        <Button size='small' color='primary' onClick={()=>{dispatch(deleteHero(hero._id))}}>
           <DeleteIcon fontSize='small'/>
           Delete
         </Button>
