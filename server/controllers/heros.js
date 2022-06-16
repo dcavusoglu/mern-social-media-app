@@ -28,10 +28,10 @@ export const createHero = (req, res) => {
 
 export const updateHero = async (req, res) => {
   const {id: _id} = req.params;
-
+  const hero = req.body;
 
   if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No hero with id');
 
-  const updatedHero = await HeroPost.findByIdAndUpdate(_id, post, {new: true});
+  const updatedHero = await HeroPost.findByIdAndUpdate(_id, hero, {new: true});
   res.json(updatedHero);
 }

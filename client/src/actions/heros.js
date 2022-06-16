@@ -19,7 +19,7 @@ export const createHero = (hero) => async (dispatch) => {
     const { data } = await api.createHero(hero);
     dispatch({ type: 'CREATE', payload: data })
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 }
 

@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './styles';
-import { createHero, updateHero } from '../../actions/heros.js';
+import { createHero, updateHero } from '../../actions/heros';
+
 
 const Form = ({currentId, setCurrentId}) => {
+  const hero = useSelector((state) => currentId ? state.heros.find((h) => h._id === currentId) : null);
+
   const [heroData, setHeroData] = useState({ creator: '', title: '', detail: '', birthDate: '', deathDate: '', school: '', tags: '', selectedFile:'' })
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(hero) setHeroData(hero);
+  }, [hero]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +35,7 @@ const Form = ({currentId, setCurrentId}) => {
   return (
     <Paper className={classes.paper}>
       <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-        <Typography variant='h6'>Creating a Hero</Typography>
+        <Typography variant='h6'>${currentId ?  'Updating the hero' : 'Creating a Hero' } </Typography>
         <TextField
           name='creator'
           variant='outlined'
